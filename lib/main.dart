@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Moose Studios',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -31,12 +31,12 @@ class MyApp extends StatelessWidget {
             latency: const Duration(milliseconds: 75),
             visibleOnHover: false,
             decoration: BoxDecoration(
-                color: Colors.transparent,
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white),),
+              color: Colors.transparent,
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white),),
           ),
         ],
-          child: const Homepage(),
+        child: const Homepage(),
       ),
     );
   }

@@ -12,7 +12,7 @@ class MobileSamples extends StatelessWidget {
     return Container(
       height: 600,
       width: double.maxFinite,
-      color: Colors.black,
+      color: AppColors.scaffoldBg,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 18.0),
         child: Column(

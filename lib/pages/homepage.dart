@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:moose_studios/constants/screen_size.dart';
 import 'package:moose_studios/utils/mobile_drawer.dart';
 import 'package:moose_studios/widgets/desktop/desktop_home.dart';
@@ -9,6 +7,7 @@ import 'package:moose_studios/widgets/desktop/header_desktop.dart';
 import 'package:moose_studios/widgets/mobile/header_mobile.dart';
 import 'package:moose_studios/widgets/mobile/mobile_samples.dart';
 import 'package:moose_studios/widgets/mobile/mobile_services.dart';
+import '../constants/colors.dart';
 import '../widgets/contact_section.dart';
 import '../widgets/desktop/desktop_samples.dart';
 import '../widgets/mobile/mobile_home.dart';
@@ -34,17 +33,27 @@ class _HomepageState extends State<Homepage> {
       builder: (context, constraints) {
         return Scaffold(
           key: scaffoldKey,
-          backgroundColor: Colors.black,
+          backgroundColor: AppColors.scaffoldBg,
           endDrawer: constraints.maxWidth >= minDesktopWidth
               ? null
-              : const MobileDrawer(),
+              : MobileDrawer(onNavItemTap: (int navIndex) {
+            //close drawer
+            scaffoldKey.currentState?.closeEndDrawer();
+            //call func
+            scrollToSection(navIndex);
+          },
+          ),
           body: Flex(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             direction: Axis.vertical,
             children: [
               constraints.maxWidth >= minDesktopWidth
-                  ? const HeaderDesktop()
+                  ?  HeaderDesktop(
+                onNavMenuTap: (int navIndex) {
+                  scrollToSection(navIndex);
+                },
+              )
                   : HeaderMobile(
                       onLogoTap: () {},
                       onMenuTap: () {
@@ -53,11 +62,16 @@ class _HomepageState extends State<Homepage> {
                     ),
                Expanded(
                 child: SingleChildScrollView(
+                  controller: scrollController,
+                  scrollDirection: Axis.vertical,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        key: navbarKeys.first,
+                      ),
                       //Home
                       constraints.maxWidth >= minDesktopWidth
                       ?const DesktopHome()
@@ -65,15 +79,25 @@ class _HomepageState extends State<Homepage> {
 
                        //Services
                       constraints.maxWidth >= minDesktopWidth
-                      ?const DesktopServices()
-                      :const MobileServices(),
+                      ? DesktopServices(
+                        key: navbarKeys[1],
+                      )
+                      : MobileServices(
+                        key: navbarKeys[1],
+                      ),
 
                       //Samples Section
                       constraints.maxWidth >= minDesktopWidth
-                      ?const DesktopSamples()
-                      :const MobileSamples(),
+                      ? DesktopSamples(
+                        key: navbarKeys[2],
+                      )
+                      : MobileSamples(
+                        key: navbarKeys[2],
+                      ),
                       //Contact Section
-                      const ContactSection(),
+                       ContactSection(
+                        key: navbarKeys[3],
+                      ),
                     ],
                   ),
                 ),
@@ -82,6 +106,15 @@ class _HomepageState extends State<Homepage> {
           ),
         );
       },
+    );
+  }
+
+  void scrollToSection(int navIndex) {
+    final key = navbarKeys[navIndex];
+    Scrollable.ensureVisible(
+      key.currentContext!,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
     );
   }
 }

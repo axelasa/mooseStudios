@@ -13,7 +13,7 @@ class DesktopServices extends StatelessWidget {
     return Container(
       height: 1600,
       width: double.maxFinite,
-      color: Colors.black,
+      color: AppColors.scaffoldBg,
       padding: const EdgeInsets.only(left: 40),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

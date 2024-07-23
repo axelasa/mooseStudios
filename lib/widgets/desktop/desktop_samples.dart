@@ -13,7 +13,7 @@ class DesktopSamples extends StatelessWidget {
     return  Container(
       height: 600,
       width: double.maxFinite,
-      color: Colors.black,
+      color: AppColors.scaffoldBg,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

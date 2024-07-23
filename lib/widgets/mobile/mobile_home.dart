@@ -13,7 +13,7 @@ class MobileHome extends StatelessWidget {
     return Container(
       //height: 864,
       width: double.maxFinite,
-      color: Colors.black,
+      color: AppColors.scaffoldBg,
       child: Padding(
         padding: const EdgeInsets.only(top:50,left: 20.0, bottom: 80,right: 20),
         child: Column(
