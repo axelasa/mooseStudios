@@ -12,7 +12,7 @@ class MobileServices extends StatelessWidget {
     return Container(
       height: 1250,
       width: double.maxFinite,
-      color: Colors.black,
+      color: AppColors.scaffoldBg,
       padding: const EdgeInsets.only(left: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

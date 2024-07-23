@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class AppColors{
-  static const  Color scaffoldBg = Color(0xff252734);
+  static const  Color scaffoldBg = Color(0xff182335);
   static const Color bgLight1 = Color(0xff333646);
   static const Color bgLight2 = Color(0xff424657);
   static const Color textFieldBg = Color(0xffC8C9CE);

@@ -32,7 +32,7 @@ class _ContactSectionState extends State<ContactSection> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
-      color: Colors.black,
+      color: AppColors.scaffoldBg,
       child: Column(
         children: [
           // title

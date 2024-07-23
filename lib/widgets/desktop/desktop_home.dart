@@ -15,7 +15,7 @@ class DesktopHome extends StatelessWidget {
     return Container(
       height: 800,
       width: double.maxFinite,
-      color: Colors.black,
+      color: AppColors.scaffoldBg,
       child: Padding(
         padding: const EdgeInsets.only(left: 100.0, top: 100, bottom: 80),
         child: Column(
