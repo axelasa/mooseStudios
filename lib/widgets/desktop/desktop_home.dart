@@ -7,8 +7,38 @@ import '../../constants/colors.dart';
 import '../../constants/intro_paragraph.dart';
 import '../../constants/intro_text.dart';
 
-class DesktopHome extends StatelessWidget {
+class DesktopHome extends StatefulWidget {
   const DesktopHome({super.key});
+
+  @override
+  State<DesktopHome> createState() => _DesktopHomeState();
+}
+
+
+class _DesktopHomeState extends State<DesktopHome> {
+
+  final Map<String, Image> _loadedImages = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _preloadImages();
+  }
+
+  void _preloadImages() {
+    for (String word in words) {
+      final image = Image.asset(wordImages[word]!, fit: BoxFit.fill);
+      image.image.resolve(const ImageConfiguration()).addListener(
+        ImageStreamListener(
+              (info, call) {
+            setState(() {
+              _loadedImages[word] = image;
+            });
+          },
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,22 +72,35 @@ class DesktopHome extends StatelessWidget {
                       MouseStyle(
                         animationDuration: const Duration(milliseconds: 0),
                         opacity: 0.5,
-                        size: const Size(400,400),
+                        size: const Size(500,500),
                         alignment: Alignment.centerRight,
                             child: kIsWeb
-                                ? ClipOval(
-                                  child: Image.network(wordImages[word]!,
-                                      height:800 ,
-                                      width: 800,
-                                      fit: BoxFit.fill,
-                                  filterQuality: FilterQuality.high,
-                                                              ),
-                                )
+                            ?ClipOval(
+                              child: _loadedImages.containsKey(word)
+                                  ? SizedBox(
+                                height: 500,
+                                width: 500,
+                                child: _loadedImages[word]!,
+                              )
+                                  : Container(
+                                height: 600,
+                                width: 600,
+                                color: Colors.grey, // Placeholder color
+                              ),
+                            )
+                            // ?ClipOval(
+                            //   child: Image.asset(
+                            //     wordImages[word]!,
+                            //     height:800 ,
+                            //     width: 800,
+                            //     fit: BoxFit.fill,
+                            //     filterQuality: FilterQuality.high,
+                            //     gaplessPlayback: true,
+                            //   ),
+                            // )
                                 : Image.asset("assets/logo/moose.png",
                                     fit: BoxFit.fill),
                           ),
-                        //),
-                      //),
                     ],
                     child: Text(
                       word,
