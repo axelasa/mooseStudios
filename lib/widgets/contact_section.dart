@@ -76,41 +76,47 @@ class _ContactSectionState extends State<ContactSection> {
             child: SizedBox(
               width: double.maxFinite,
               child: ElevatedButton(
-                onPressed: () async {
-                  setState(() {
-                    _validate = messageController.text.isEmpty;
-                  });
-
-                  if (!_formKeyDesktop.currentState!.validate() ||
-                      !_formKeyMobile.currentState!.validate() ||
-                      _validate) {
-                    return;
-                  }
-
-                  setState(() {
-                    isLoading = true; // Show loading indicator
-                  });
-
-                  try {
-                    await SendEmailService.sendMail(
-                      name: nameController.text,
-                      email: emailController.text,
-                      subject: subjectController.text,
-                      message: messageController.text,
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Email sent successfully')),
-                    );
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Failed to send email')),
-                    );
-                  } finally {
+                  onPressed: () async {
                     setState(() {
-                      isLoading = false; // Hide loading indicator
+                      _validate = messageController.text.isEmpty;
                     });
-                  }
-                },
+
+                    bool isValid = false;
+
+                    if (isDesktop(context)) {
+                      isValid = _formKeyDesktop.currentState!.validate();
+                    } else {
+                      isValid = _formKeyMobile.currentState!.validate();
+                    }
+
+                    if (!isValid || _validate) {
+                      return;
+                    }
+
+                    setState(() {
+                      isLoading = true; // Show loading indicator
+                    });
+
+                    try {
+                      await SendEmailService.sendMail(
+                        name: nameController.text,
+                        email: emailController.text,
+                        subject: subjectController.text,
+                        message: messageController.text,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Email sent successfully')),
+                      );
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Failed to send email')),
+                      );
+                    } finally {
+                      setState(() {
+                        isLoading = false; // Hide loading indicator
+                      });
+                    }
+                  },
                 style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all<Color>(AppColors.yellowPrimary)
                 ),
@@ -300,4 +306,9 @@ class _ContactSectionState extends State<ContactSection> {
       ),
     );
   }
+
+  bool isDesktop(BuildContext context) {
+    return MediaQuery.of(context).size.width >= minDesktopWidth;
+  }
+
 }
