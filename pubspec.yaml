@@ -70,6 +70,7 @@ flutter:
   assets:
     - assets/
     - assets/work_samples/
+    - assets/display/
     - assets/logo/
     - assets/3d/
   #   - images/a_dot_ham.jpeg

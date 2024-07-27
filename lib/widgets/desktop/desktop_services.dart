@@ -5,8 +5,19 @@ import 'package:model_viewer_plus/model_viewer_plus.dart';
 import '../../constants/colors.dart';
 import '../../constants/three_d_models.dart';
 
-class DesktopServices extends StatelessWidget {
+class DesktopServices extends StatefulWidget {
   const DesktopServices({super.key});
+
+  @override
+  _DesktopServicesState createState() => _DesktopServicesState();
+}
+
+class _DesktopServicesState extends State<DesktopServices> {
+  @override
+  void initState() {
+    super.initState();
+    _preload3DModels();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +31,7 @@ class DesktopServices extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top:10.0,bottom: 25,),
+            padding: const EdgeInsets.only(top: 10.0, bottom: 25),
             child: Center(
               child: Text(
                 "My Services",
@@ -41,8 +52,7 @@ class DesktopServices extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 20,
@@ -64,7 +74,6 @@ class DesktopServices extends StatelessWidget {
                       height: 400,
                       width: 380,
                       child: ModelViewer(
-                        //backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
                         withCredentials: true,
                         src: camera,
                         alt: 'CANON DSLR CAMERA',
@@ -84,8 +93,7 @@ class DesktopServices extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 20,
@@ -107,7 +115,6 @@ class DesktopServices extends StatelessWidget {
                       height: 400,
                       width: 380,
                       child: ModelViewer(
-                        //backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
                         withCredentials: true,
                         src: videoCamera,
                         alt: 'CANON DSLR CAMERA',
@@ -127,8 +134,7 @@ class DesktopServices extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 20,
@@ -150,7 +156,6 @@ class DesktopServices extends StatelessWidget {
                       height: 400,
                       width: 380,
                       child: ModelViewer(
-                        //backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
                         withCredentials: true,
                         src: studio,
                         alt: 'CANON DSLR CAMERA',
@@ -179,8 +184,7 @@ class DesktopServices extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 20,
@@ -202,7 +206,6 @@ class DesktopServices extends StatelessWidget {
                       height: 400,
                       width: 380,
                       child: ModelViewer(
-                        //backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
                         withCredentials: true,
                         src: publicRelations,
                         alt: 'CANON DSLR CAMERA',
@@ -244,7 +247,6 @@ class DesktopServices extends StatelessWidget {
                       height: 400,
                       width: 380,
                       child: ModelViewer(
-                        //backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
                         withCredentials: true,
                         src: marketing,
                         alt: 'CANON DSLR CAMERA',
@@ -264,8 +266,7 @@ class DesktopServices extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 20,
@@ -287,7 +288,6 @@ class DesktopServices extends StatelessWidget {
                       height: 400,
                       width: 380,
                       child: ModelViewer(
-                        //backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
                         withCredentials: true,
                         src: drone,
                         alt: 'CANON DSLR CAMERA',
@@ -316,8 +316,7 @@ class DesktopServices extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 20,
@@ -339,7 +338,6 @@ class DesktopServices extends StatelessWidget {
                       height: 400,
                       width: 380,
                       child: ModelViewer(
-                        //backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
                         withCredentials: true,
                         src: streaming,
                         alt: 'CANON DSLR CAMERA',
@@ -359,8 +357,7 @@ class DesktopServices extends StatelessWidget {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 20,
@@ -382,7 +379,6 @@ class DesktopServices extends StatelessWidget {
                       height: 400,
                       width: 380,
                       child: ModelViewer(
-                        //backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
                         withCredentials: true,
                         src: events,
                         alt: 'CANON DSLR CAMERA',
@@ -404,5 +400,31 @@ class DesktopServices extends StatelessWidget {
         ],
       ),
     );
+  }
+  void _preload3DModels() {
+    // Initialize the ModelViewer widgets to preload the 3D models
+    const List<String> models = [
+      camera,
+      videoCamera,
+      studio,
+      publicRelations,
+      marketing,
+      drone,
+      streaming,
+      events,
+    ];
+
+    for (String model in models) {
+      ModelViewer(
+        withCredentials: true,
+        src: model,
+        alt: 'Preload 3D Model',
+        ar: false,
+        autoRotate: true,
+        disableZoom: true,
+        cameraControls: true,
+        interactionPrompt: InteractionPrompt.none,
+      );
+    }
   }
 }

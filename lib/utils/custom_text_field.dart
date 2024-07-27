@@ -8,11 +8,13 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.maxLines = 1,
     this.hintText,
+    this.errorText,
   });
 
   final TextEditingController? controller;
   final int maxLines;
   final String? hintText;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class CustomTextField extends StatelessWidget {
         enabledBorder: getInputBorder,
         border: getInputBorder,
         hintText: hintText,
+        errorText:errorText,
         hintStyle: const TextStyle(
           color: Color(0xff979797),
         ),

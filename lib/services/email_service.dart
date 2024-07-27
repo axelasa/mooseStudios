@@ -5,7 +5,7 @@ import '../constants/network.dart';
 
 class SendEmailService {
 
-  static sendMail({
+  static Future<void> sendMail({
     required String name,
     required String email,
     required String subject,
@@ -30,11 +30,15 @@ class SendEmailService {
           }
         }),
       );
+
       if (response.statusCode == 200) {
         debugPrint(response.body);
+      } else {
+        debugPrint('Failed to send email: ${response.statusCode} ${response.body}');
       }
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('Error sending email: $e');
     }
   }
+
 }
